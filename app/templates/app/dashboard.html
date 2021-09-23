@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      body {
+        font-family: "Lato", sans-serif;
+      }
+
+      .sidenav {
+        height: 100%;
+        width: 250px;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        background: rgba(10, 197, 4, 0.1);
+        overflow-x: hidden;
+        padding-top: 20px;
+      }
+
+      .sidenav a {
+        padding: 6px 6px 6px 32px;
+        text-decoration: none;
+        padding-top: 10px;
+        font-size: 20px;
+        display: block;
+      }
+      .active {
+        width: 100%;
+
+        height: 55px;
+        color: white;
+        background: green;
+      }
+      a{
+        color:green;
+      }
+      .sidenav a:hover {
+        color: lightgreen;
+      }
+.btn-info{
+  margin-left:30px;
+  margin-right:35px;
+  margin-top:200px;
+  padding-right:30px;
+}
+      .main {
+        margin-top: 2%;
+        margin-left: 250px; /* Same as the width of the sidenav */
+      }
+
+      @media screen and (max-height: 450px) {
+        .sidenav {
+          padding-top: 15px;
+        }
+        .sidenav a {
+          font-size: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="sidenav">
+      <div class="person">
+     
+      
+        <h5 style="padding-left:10px; padding-top:10px; padding-bottom:20px;">Hi {{request.user.contactPerson}}</h5>
+      </div>
+      <a href="#" class="active">Dashboard</a>
+      <a href="" class="">Update Profile</a>
+      <a href="">Contact</a>
+      <a href="">Logout</a>
+      <!-- <a href="" class="btn btn-info">Logout</a> -->
+    </div>
+
+    <div class="main">
+      <div class="container">
+        <h3 style="float: left">Radio Active Sources</h3>
+        <a
+          href="{% url 'addsource' %}"
+          class="btn btn-success"
+          style="float: right"
+          >Add New</a
+        >
+        <br />
+        <br />
+        <hr />
+        <table class="table table-bordered table-hover">
+          <tr style="background-color: yellow;">
+            <td>Category</td>
+            <td>Name</td>
+            <td>State</td>
+            <td>Address</td>
+            <td>Acknowledge</td>
+            <td>Payment</td>
+            <td>Visit</td>
+            <td>Installed</td>
+            <td>Action</td>
+            
+          </tr>
+          {% for obj in page_obj %}
+            <tr data-href='url://'>
+              <td>
+                {{obj.sourceCategory}}
+              </td>
+              <td>
+                {{obj.sourceName}}
+              </td>
+              <td>
+                {{obj.sourceState}}
+              </td>
+              <td>
+                {{obj.sourceAddress}}
+              </td>
+              <td>
+                {% if obj.acknowleged == False %}
+                <i class="fad fa-window-close"></i>
+               {% else %}
+               <i class="fas fa-check"></i>
+               {% endif %}
+              </td>
+              <td>
+                {{obj.payment}}
+              </td>
+              <td>
+                {{obj.siteVisit}}
+              </td>
+              <td>
+                {{obj.installation}}
+              </td>
+              <td>
+                <a href="" class="btn btn-danger"> Delete</a>
+              </td>
+            </tr>
+          {% endfor%}
+          <div class="pagination">
+              <span class="step-links">
+                  {% if page_obj.has_previous %}
+                      <a href="?page=1">&laquo; first</a> |
+                      <a href="?page={{ page_obj.previous_page_number }}">previous</a> |
+                  {% endif %}
+          
+                  <span class="current">
+                      Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                  </span> 
+          
+                  {% if page_obj.has_next %}
+                      <a href="?page={{ page_obj.next_page_number }}">next</a> |
+                      <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                  {% endif %}
+        </table>
+      </div>
+    </div>
+  </body>
+</html>
