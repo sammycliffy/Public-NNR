@@ -14,7 +14,7 @@ class SignUpForm(UserCreationForm):
         max_length=254, widget=forms.TextInput(attrs={'class': 'form-control'}))
     contactPerson = forms.CharField(
         max_length=254, widget=forms.TextInput(attrs={'class': 'form-control'}))
-    phone = forms.CharField(max_length=254, widget=forms.TextInput(
+    contactPhone = forms.CharField(max_length=254, widget=forms.TextInput(
         attrs={'class': 'form-control'}))
     email = forms.EmailField(label="Email", max_length=254, widget=forms.TextInput(
         attrs={'class': 'form-control', }))
@@ -28,6 +28,7 @@ class SignUpForm(UserCreationForm):
         self.fields['companyName'].label = "Company Name"
         self.fields['companyAddress'].label = "Company Address"
         self.fields['contactPerson'].label = "Contact Person"
+        self.fields['contactPhone'].label = "Phone"
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
@@ -45,12 +46,13 @@ class SignUpForm(UserCreationForm):
     class Meta:
         model = User
         fields = ('companyName', 'companyAddress',
-                  'contactPerson', 'phone', 'email', 'password1', )
+                  'contactPerson', 'contactPhone', 'email', 'password1', )
 
 
 class LoginForm(AuthenticationForm):
-    email = forms.CharField(label=("Email"), max_length=30,
-                            widget=forms.TextInput(attrs={'class': 'form-control'}))
+
+    # email_address = forms.CharField(label=("Email"), max_length=30,
+    #                                 widget=forms.TextInput(attrs={'class': 'form-control'}))
     password = forms.CharField(
         label="Password", widget=forms.PasswordInput(attrs={'class': 'form-control'}))
 

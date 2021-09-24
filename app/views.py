@@ -4,6 +4,7 @@ from django.views.generic.list import ListView
 from django.shortcuts import render, redirect
 from .forms import *
 from .models import *
+from django.core.mail import send_mail
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.contrib.auth.decorators import login_required
@@ -69,15 +70,30 @@ def dashboard(request):
 
 
 @login_required
+def delete(request, pk=None):
+    delete = RadioActiveSourcesModel.objects.filter(pk=pk).delete()
+    if (delete):
+        return redirect('dashboard')
+
+
+@login_required
 def contact(request):
     if request.method == 'POST':
-        message = request.POST.get('message')
+        message = request.POST.get('message', None)
         print(message)
-        # createMessage = Message.object.create(
-        #     user = request.user,
-        #     message = message
-        # )
-        # if(createMessage):
-        #     messages.success(request, 'sent successfully.')
+        Message.objects.create(
+            user=request.user,
+            message=message
+        )
+        sendEmail = send_mail(
+            'Sent email from {} - {}'.format(request.user.contactPerson,
+                                             request.user.contactPhone),
+            'Here is the feedback. {}'.format(message),
+            request.user.email,
+            ['support@gigazone.com.ng'],
+            fail_silently=False,
+        )
+        if(sendEmail):
+            messages.success(request, 'sent successfully.')
 
     return render(request, 'app/contact.html')

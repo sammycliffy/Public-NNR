@@ -75,10 +75,9 @@
           Hi {{request.user.contactPerson}}
         </h5>
       </div>
-      <a href="#" class="active">Dashboard</a>
-      <a href="" class="">Update Profile</a>
-      <a href="">Contact</a>
-      <a href="">Logout</a>
+      <a href="{% url 'dashboard' %}" >Dashboard</a>
+      <a class="active" href="{% url 'contact' %}">Contact</a>
+      <a href="{% url 'logout' %}">Logout</a>
       <!-- <a href="" class="btn btn-info">Logout</a> -->
     </div>
 
@@ -90,7 +89,8 @@
         <br />
         <hr />
 
-        <form action="{% url 'contact' %}" method="POST">
+        <form action="" method="POST">
+          {% csrf_token %}
             {% if messages %}
                 <ul class="messages">
                 {% for message in messages %}
@@ -106,9 +106,8 @@
             rows="10"
           ></textarea>
           <br />
-          <a href="" style="float: right" class="btn btn-success btn-lg"
-            >Send</a
-          >
+          <input type="submit" value="Send" style="float: right" class="btn btn-success btn-lg">
+           
         </form>
       </div>
     </div>

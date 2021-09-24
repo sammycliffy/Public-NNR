@@ -71,7 +71,7 @@
         <h5 style="padding-left:10px; padding-top:10px; padding-bottom:20px;">Hi {{request.user.contactPerson}}</h5>
       </div>
       <a href="#" class="active">Dashboard</a>
-      <a href="" class="">Update Profile</a>
+      <!-- <a href="" class="">Update Profile</a> -->
       <a href="{% url 'contact' %}">Contact</a>
       <a href="{% url 'logout' %}">Logout</a>
       <!-- <a href="" class="btn btn-info">Logout</a> -->
@@ -117,23 +117,36 @@
                 {{obj.sourceAddress}}
               </td>
               <td>
+               
                 {% if obj.acknowleged == False %}
-                <i class="fad fa-window-close"></i>
+                  Pending
                {% else %}
-               <i class="fas fa-check"></i>
+              Approved
                {% endif %}
               </td>
               <td>
-                {{obj.payment}}
+                {% if obj.payment == False %}
+                  Pending
+               {% else %}
+              Approved
+               {% endif %}
               </td>
               <td>
-                {{obj.siteVisit}}
+                {% if obj.siteVisit == False %}
+                  Pending
+               {% else %}
+              Approved
+               {% endif %}
               </td>
               <td>
-                {{obj.installation}}
+                {% if obj.installation == False %}
+                  Pending
+               {% else %}
+              Approved
+               {% endif %}
               </td>
               <td>
-                <a href="" class="btn btn-danger"> Delete</a>
+                <a href="{% url 'delete' pk=obj.pk %}" class="btn btn-danger"> Delete</a>
               </td>
             </tr>
           {% endfor%}
