@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-@_*415#(vjeyktkuegdl9y6q!yd9y4yln8u%m^17ic29z$no2p
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'nnrsms.herokuapp.com''
+    'nnrsms.herokuapp.com'
 ]
 
 
