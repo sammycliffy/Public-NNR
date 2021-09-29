@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <link
-      rel="stylesheet"
-      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  
+   <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard</title>
     <style>
       body {
         font-family: "Lato", sans-serif;
@@ -66,6 +69,24 @@
     </style>
   </head>
   <body>
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Are you sure you want to delete?</h5>
+          </div>
+          <div class="modal-body" style="float: right;">
+          <button type="button" data-dismiss="modal" class="btn btn-success btn-md">No</button>
+          <button type="button" onclick="send()" class="btn btn-danger btn-md">Yes</button>
+    
+          </div>
+         
+          <!-- <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div> -->
+        </div>
+      </div>
+    </div>
     <div class="sidenav">
       <div class="person">
         <h5 style="padding-left:10px; padding-top:10px; padding-bottom:20px;">Hi {{request.user.contactPerson}}</h5>
@@ -73,7 +94,9 @@
       <a href="#" class="active">Dashboard</a>
       <!-- <a href="" class="">Update Profile</a> -->
       <a href="{% url 'contact' %}">Contact</a>
+      <a href="{% url 'update_profile' %}">Update Profile</a>
       <a href="{% url 'logout' %}">Logout</a>
+    
       <!-- <a href="" class="btn btn-info">Logout</a> -->
     </div>
 
@@ -90,18 +113,20 @@
         <br />
         <hr />
         <table class="table table-bordered table-hover">
-          <tr style="background-color: yellow;">
-            <td>Category</td>
-            <td>Name</td>
-            <td>State</td>
-            <td>Address</td>
-            <td>Acknowledge</td>
-            <td>Payment</td>
-            <td>Visit</td>
-            <td>Installed</td>
-            <td>Action</td>
+         <thead style="background-color: yellow;">
+          
+            <th>Category</th>
+            <th>Name</th>
+            <th>State</th>
+            <th>Address</th>
+            <th>Acknowledge</th>
+            <th>Payment</th>
+            <th>Visit</th>
+            <th>Installed</th>
+            <th>Action</th>
             
-          </tr>
+       
+         </thead>
           {% for obj in page_obj %}
             <tr data-href='url://'>
               <td>
@@ -144,9 +169,11 @@
                {% else %}
               Approved
                {% endif %}
-              </td>
+              </td> <!-- {% url 'delete' pk=obj.pk %} -->
               <td>
-                <a href="{% url 'delete' pk=obj.pk %}" class="btn btn-danger"> Delete</a>
+                <input type="hidden" name="" value="{{obj.pk }}" id="pk">
+                <!--  url 'delete' pk=obj.pk  -->
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Delete</button>
               </td>
             </tr>
           {% endfor%}
@@ -168,5 +195,14 @@
         </table>
       </div>
     </div>
-  </body>
+    <script>
+      
+      function send(){
+        const pk = document.getElementById("pk").value;
+        location.href = "/delete/"+pk;
+        
+        console.log(pk);
+      }
+    </script>
+    </body>
 </html>

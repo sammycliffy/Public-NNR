@@ -9,7 +9,7 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     />
 
-    <title>Add Source</title>
+    <title>Signup</title>
     <style>
       label {
         color: green;
@@ -59,25 +59,25 @@
     <br />
     <div class="container">
       <div class="row">
-        <div class="col-lg-3"></div>
         <div class="col-lg-5">
-          <div class="heading"><span>Add Source</span></div>
+          <div class="heading"><span>Edit Profile</span></div>
           <div class="center-div">
-            <form method="post" action="{% url 'addsource' %}">
+            <form method="post" action="{% url 'signup' %}">
               {% csrf_token %}
               <input
                 type="hidden"
                 value="{{request.get_full_path}}"
                 name="referrer"
               />
-              {{form.as_p}}
+              {{user_form.as_p}}
               <center>
-                <button type="submit" class="btn btn-success">Add Source</button
+                <button type="submit" class="btn btn-success btn-lg">
+                  Update</button
                 ><br />
                 <br />
                 <p>
                   <a href="{% url 'dashboard' %}" class="btn btn-link">
-                    back to dashboard
+                    dashboard
                   </a>
                 </p>
               </center>

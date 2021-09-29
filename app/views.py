@@ -77,6 +77,24 @@ def delete(request, pk=None):
 
 
 @login_required
+def update_profile(request):
+    if request.method == 'POST':
+        user_form = SignUpForm(request.POST, instance=request.user)
+        if user_form.is_valid():
+            user_form.save()
+            messages.success(request, _(
+                'Your profile was successfully updated!'))
+            return redirect('dashboard')
+        else:
+            messages.error(request, _('Please correct the error below.'))
+    else:
+        user_form = SignUpForm(instance=request.user)
+    return render(request, 'app/update_profile.html', {
+        'user_form': user_form,
+    })
+
+
+@login_required
 def contact(request):
     if request.method == 'POST':
         message = request.POST.get('message', None)

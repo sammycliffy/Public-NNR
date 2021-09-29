@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 import dj_database_url
 from pathlib import Path
 
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -62,6 +63,7 @@ ACCOUNT_UNIQUE_EMAIL = True
 ACCOUNT_USERNAME_REQUIRED = False
 AUTHENTICATION_BACKENDS = ['app.emailbackend.EmailBackend', ]
 LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'login'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -83,8 +85,8 @@ WSGI_APPLICATION = 'radioactive.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
-
-'''DATABASES = {
+'''
+DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
@@ -94,6 +96,8 @@ WSGI_APPLICATION = 'radioactive.wsgi.application'
 DATABASES = {
     'default': dj_database_url.config()
 }
+
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -145,3 +149,4 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = "nnra@gigazone.com.ng"
 EMAIL_HOST_PASSWORD = "Giga2021@"
 DEFAULT_FROM_EMAIL = 'GIGASEC <nnra@gigazone.com.ng>'
+STATIC_URL = '/static/'
