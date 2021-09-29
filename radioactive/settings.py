@@ -10,11 +10,13 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import dj_database_url
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+DATABASE_URL = 'postgres://xzkkveisfjyqzg:080b0e3bc975aa8d95ba22460996269423084625b30865bc2c6c67513cf88b62@ec2-52-6-211-59.compute-1.amazonaws.com:5432/d9bkm4s98ik07i'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
@@ -26,7 +28,8 @@ SECRET_KEY = 'django-insecure-@_*415#(vjeyktkuegdl9y6q!yd9y4yln8u%m^17ic29z$no2p
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'nnrsms.herokuapp.com'
+    'nnrsms.herokuapp.com',
+    'localhost'
 ]
 
 
@@ -81,14 +84,16 @@ WSGI_APPLICATION = 'radioactive.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
+'''DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
-
-
+'''
+DATABASES = {
+    'default': dj_database_url.config()
+}
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
