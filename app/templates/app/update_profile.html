@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -12,15 +11,8 @@
 
     <title>Signup</title>
     <style>
-      body {
-        background: rgb(209, 255, 209);
-      }
       label {
         color: green;
-      }
-      h4 {
-        text-align: center;
-        line-height: 30px;
       }
       #logo a > h3 {
         font-size: 15px;
@@ -68,42 +60,7 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-5">
-          <img
-            src="https://res.cloudinary.com/connect-me/image/upload/v1633007621/nnralogo.png"
-            alt="nnra logo"
-            srcset=""
-            width="400"
-            height="100"
-          />
-
-          <h4 style="padding-top: 20px">
-            Welcome to the Nigerian Nuclear Regulatory Authority Portal for
-            National Radioactive Source Monitoring System (NRSMS)
-          </h4>
-          <br />
-          <h6 style="color: green">
-            All Radioactive Sources Categories I, II and III are required to be
-            registered and monitored by NNRA
-          </h6>
-          <br />
-          <em>
-            Create your company profile and register your sources individually
-            to get started.
-          </em>
-
-          <address>
-            <br /><br /><br />
-            <hr />
-            <b>For support:</b> <br />
-            email: support@gigasecintl.com <br />
-            Call: +234 706 418 3475
-            <br /><br /><br /><br />
-            <p>© 2021 Gigasec &amp; NNRA. All rights reserved</p>
-          </address>
-        </div>
-        <div class="col-lg-1"></div>
-        <div class="col-lg-5">
-          <div class="heading"><span>Company Registration</span></div>
+          <div class="heading"><span>Edit Profile</span></div>
           <div class="center-div">
             <form method="post" action="{% url 'signup' %}">
               {% csrf_token %}
@@ -112,14 +69,16 @@
                 value="{{request.get_full_path}}"
                 name="referrer"
               />
-              {{form.as_p}}
+              {{user_form.as_p}}
               <center>
                 <button type="submit" class="btn btn-success btn-lg">
-                  Sign up</button
+                  Update</button
                 ><br />
+                <br />
                 <p>
-                  Have an account?
-                  <a href="{% url 'login' %}" class="btn btn-link"> Login </a>
+                  <a href="{% url 'dashboard' %}" class="btn btn-link">
+                    dashboard
+                  </a>
                 </p>
               </center>
             </form>

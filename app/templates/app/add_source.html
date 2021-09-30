@@ -9,8 +9,11 @@
       href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
     />
 
-    <title>Document</title>
+    <title>Add Source</title>
     <style>
+      body {
+        background: rgb(209, 255, 209);
+      }
       label {
         color: green;
       }
@@ -61,7 +64,7 @@
       <div class="row">
         <div class="col-lg-3"></div>
         <div class="col-lg-5">
-          <div class="heading"><span>AddSource</span></div>
+          <div class="heading"><span>Add Source</span></div>
           <div class="center-div">
             <form method="post" action="{% url 'addsource' %}">
               {% csrf_token %}
@@ -76,9 +79,8 @@
                 ><br />
                 <br />
                 <p>
-                  back to
                   <a href="{% url 'dashboard' %}" class="btn btn-link">
-                    dashboard
+                    back to dashboard
                   </a>
                 </p>
               </center>

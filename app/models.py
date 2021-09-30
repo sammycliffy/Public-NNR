@@ -47,6 +47,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractUser):
+    username = None
     email = models.EmailField(('email address'), unique=True)
     companyAddress = models.CharField(max_length=255, null=True)
     companyName = models.CharField(max_length=255, null=True)
@@ -113,6 +114,7 @@ class RadioActiveSourcesModel(models.Model):
     sourceName = models.CharField(max_length=255, null=True)
     sourceState = models.CharField(max_length=255, null=True)
     sourceAddress = models.CharField(max_length=255, null=True)
+    date = models.DateTimeField(auto_now=True)
 
 
 class Message(models.Model):
